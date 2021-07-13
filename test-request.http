@@ -1,0 +1,8 @@
+### Get all items
+GET http://localhost/api/menu/items
+
+### Get one item
+GET http://localhost/api/menu/items/3
+
+### Delete one item
+DELETE http://localhost/api/menu/items/1

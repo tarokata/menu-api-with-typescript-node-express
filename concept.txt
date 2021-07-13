@@ -1,0 +1,90 @@
+Node.js and Typescript Tutorial: Build a CRUD API
+
+This tutorial shows you how to build a feature-complete API using 
+Node.js, Express and Typescript that lets clients perform data
+operations on resources that describe a restaurant menu.
+Using Typescript with Node.js gives you access to optional static
+type-checking along with robust tooling for large apps.
+
+Learn also how to define data models, create a data service, and quickly build modular endpoints. As an option, you can also learn how to secure the API using Auth0.
+
+For simplicity, you'll store data in-memory and not in an external database.
+
+For security, you'll limit API access by following these business rules:
+- Anyone can read data
+- Only authenticated users with a menu-admin role can create, update or 
+delete menu items.
+
+Initialize a Node.js project within the project directory by creating 
+a package.json file with default settings.
+
+Install Project Dependencies
+npm i express dotenv cors helmet
+
+dotenv: Zero-dependency module that loads environment variables from a 
+.env file into process.env.
+
+cors: Express middleware to enable CORS with various operations.
+
+helmet: Express middleware to secure your apps by setting various HTTP headers,
+which mitigate common attack vectors.
+
+To use Typescript, you also need to install a stable version of typescript as 
+a developer dependency
+npm i -D typescript
+
+To use Typescript effectively, you need to install type definitions
+for the packages you installed previously
+npm i -D @types/node @types/express @types/dotenv @types/cors @types/helmet
+
+To easily generate tsconfig.json file, ensure that you are under the project
+directory and issue the following command
+
+npx tsc --init
+
+Use Environmental variables  
+Instead of using hard-coded configuration variables within files
+throughout your project, you can define all those variables in a central location
+and load them into the file modules that need them. Developers working with
+Node.js commonly define this central location as a hidden file named .env
+
+helmet is a collection of 14 small middleware functions that set HTTP response
+headers. Mouting helmet() doesn't include all of these middleware functions but
+provides you  with sensible defaults.
+
+By mouting cors(), you enable all CORS requests. With express.json(), you parse
+incoming requests with json payloads
+
+Improve TypeScript Development Workflow
+npm i -D ts-node-dev
+
+--respawn: Keep watching for changes after the script has exited.
+
+--pretty: Use pretty diagnostic formatter (TS_NODE_PRETTY).
+
+--transpile-only: Use TypeScript's faster transpileModule (TS_NODE_TRANSPILE_ONLY).
+
+src/index.ts: This is the application's entry file.
+
+Model Data with Typescript Interfaces
+
+Get all items
+curl http://localhost:7000/api/menu/items -i
+
+Invoke-WebRequest
+[-UseBasicParsing]
+      [-Uri] <Uri>
+
+Get an item
+curl http://localhost:7000/api/menu/items/2 -i
+
+Add an item
+
+curl -X POST -H 'Content-Type: application/json' '{
+  "name": "Salad",
+  "price": 499,
+  "description": "Fresh",
+  "image": "https://images.ctfassets.net/23aumh6u8s0i/5pnNAeu0kev0P5Neh9W0jj/5b62440be149d0c1a9cb84a255662205/whatabyte_salad-sm.png"
+}' http://localhost:7000/api/menu/items
+
+curl http://localhost:7000/employees/ -i
